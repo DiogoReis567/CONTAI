@@ -1,0 +1,1560 @@
+//Miguel
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FinAI | Inteligência Financeira</title>
+    <meta
+      name="description"
+      content="FinAI é uma plataforma de inteligência financeira com IA para transformar dados em decisões estratégicas."
+    />
+    <style>
+      :root {
+        --bg-primary: #01131F;
+        --bg-secondary: #021929;
+        --card: #072737;
+        --border: #083C4E;
+        --primary: #05ECBD;
+        --secondary: #04AA8D;
+        --teal-dark: #06676A;
+        --surface: #1C303E;
+        --border-light: #2C4253;
+        --blue: #3F7FBB;
+        --copper: #BC8063;
+        --text-primary: #FFFFFF;
+        --text-secondary: #BDB8BA;
+        --text-muted: #8998A4;
+        --text-soft: #63727E;
+        --text-dark: #050507;
+        --shadow-soft: 0 16px 40px rgba(3, 12, 18, 0.45);
+        --shadow-glow: 0 0 0 1px rgba(5, 236, 189, 0.18), 0 18px 40px rgba(5, 236, 189, 0.12);
+        --radius-xl: 28px;
+        --radius-lg: 22px;
+        --radius-md: 16px;
+        --radius-sm: 12px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(5, 236, 189, 0.12), transparent 25%),
+          radial-gradient(circle at top right, rgba(63, 127, 187, 0.10), transparent 30%),
+          linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      button,
+      input,
+      textarea,
+      select {
+        font: inherit;
+      }
+
+      .container {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .section {
+        padding: 96px 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 14px;
+        border-radius: 999px;
+        background: rgba(5, 236, 189, 0.08);
+        border: 1px solid rgba(5, 236, 189, 0.25);
+        color: var(--primary);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 12px rgba(5, 236, 189, 0.9);
+      }
+
+      .section-header {
+        max-width: 640px;
+        margin: 0 auto 44px;
+        text-align: center;
+      }
+
+      .section-header h2 {
+        margin: 20px 0 14px;
+        font-size: clamp(2rem, 4vw, 3.2rem);
+        line-height: 1.1;
+        letter-spacing: -0.05em;
+      }
+
+      .section-header p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+        padding: 0 22px;
+        border-radius: 14px;
+        border: 1px solid transparent;
+        font-weight: 700;
+        transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+        cursor: pointer;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, var(--primary) 0%, #58f0d0 100%);
+        color: var(--text-dark);
+        box-shadow: 0 10px 24px rgba(5, 236, 189, 0.25);
+      }
+
+      .btn-primary:hover {
+        box-shadow: 0 18px 28px rgba(5, 236, 189, 0.28);
+      }
+
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: rgba(255, 255, 255, 0.08);
+        color: var(--text-primary);
+      }
+
+      .btn-secondary:hover {
+        border-color: rgba(5, 236, 189, 0.32);
+        background: rgba(5, 236, 189, 0.05);
+      }
+
+      .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(18px);
+        background: rgba(1, 19, 31, 0.74);
+        border-bottom: 1px solid rgba(8, 60, 78, 0.5);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 84px;
+        gap: 18px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.65rem;
+        font-weight: 800;
+        letter-spacing: -0.05em;
+      }
+
+      .brand-mark {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary) 0%, #87f2d3 100%);
+        box-shadow: 0 0 16px rgba(5, 236, 189, 0.9);
+      }
+
+      .nav-menu {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        color: var(--text-secondary);
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 28px;
+      }
+
+      .nav-link {
+        position: relative;
+        font-size: 0.96rem;
+        color: var(--text-secondary);
+        transition: color 0.2s ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -8px;
+        width: 100%;
+        height: 2px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transform-origin: center;
+        transition: transform 0.25s ease;
+      }
+
+      .nav-link:hover {
+        color: var(--text-primary);
+      }
+
+      .nav-link:hover::after {
+        transform: scaleX(1);
+      }
+
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .nav-actions .btn {
+        min-height: 44px;
+        padding: 0 18px;
+      }
+
+      .nav-actions .btn-primary {
+        background: var(--primary);
+      }
+
+      .nav-toggle {
+        display: none;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text-primary);
+        cursor: pointer;
+      }
+
+      .nav-toggle span,
+      .nav-toggle::before,
+      .nav-toggle::after {
+        display: block;
+        width: 20px;
+        height: 2px;
+        margin: 0 auto;
+        background: var(--text-primary);
+        border-radius: 999px;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+
+      .nav-toggle::before,
+      .nav-toggle::after {
+        content: "";
+      }
+
+      .nav-toggle::before {
+        transform: translateY(-7px);
+      }
+
+      .nav-toggle::after {
+        transform: translateY(5px);
+      }
+
+      .nav-toggle.is-open::before {
+        transform: translateY(2px) rotate(45deg);
+      }
+
+      .nav-toggle.is-open::after {
+        transform: translateY(-2px) rotate(-45deg);
+      }
+
+      .nav-toggle.is-open span {
+        opacity: 0;
+      }
+
+      .hero {
+        padding: 54px 0 70px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        gap: 36px;
+      }
+
+      .hero-copy {
+        max-width: 620px;
+      }
+
+      .hero-copy h1 {
+        margin: 24px 0 18px;
+        font-size: clamp(2.8rem, 5vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: -0.07em;
+      }
+
+      .hero-copy h1 .highlight {
+        color: var(--primary);
+      }
+
+      .hero-copy p {
+        margin: 0 0 30px;
+        color: var(--text-secondary);
+        font-size: 1.15rem;
+        max-width: 560px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-bottom: 28px;
+      }
+
+      .hero-points {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px 18px;
+        color: var(--text-primary);
+        font-size: 0.96rem;
+      }
+
+      .hero-points span {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 8px 0;
+      }
+
+      .hero-points span::before {
+        content: "✓";
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(5, 236, 189, 0.12);
+        color: var(--primary);
+        font-weight: 700;
+      }
+
+      .dashboard-shell {
+        position: relative;
+        padding: 22px;
+        background: linear-gradient(180deg, rgba(7, 39, 55, 0.95), rgba(13, 28, 37, 0.85));
+        border: 1px solid rgba(8, 60, 78, 0.8);
+        border-radius: var(--radius-xl);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .dashboard-shell::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        border-radius: inherit;
+        background: linear-gradient(135deg, rgba(5, 236, 189, 0.18), transparent 38%, rgba(63, 127, 187, 0.1));
+        z-index: 0;
+      }
+
+      .dashboard {
+        position: relative;
+        z-index: 1;
+        border-radius: 20px;
+        padding: 20px;
+        background: rgba(2, 25, 41, 0.78);
+        border: 1px solid rgba(8, 60, 78, 0.75);
+      }
+
+      .dashboard-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .dashboard-top h3 {
+        margin: 0;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        font-weight: 700;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        border-radius: 999px;
+        background: rgba(5, 236, 189, 0.12);
+        border: 1px solid rgba(5, 236, 189, 0.25);
+        color: var(--primary);
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .pill::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+
+      .stat-card {
+        padding: 16px 18px;
+        background: rgba(15, 34, 46, 0.92);
+        border: 1px solid rgba(8, 60, 78, 0.7);
+        border-radius: 16px;
+      }
+
+      .stat-label {
+        font-size: 0.74rem;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 10px;
+      }
+
+      .stat-value {
+        font-size: clamp(1.2rem, 2vw, 1.8rem);
+        font-weight: 800;
+        letter-spacing: -0.04em;
+      }
+
+      .stat-value .up {
+        color: var(--primary);
+        font-size: 0.8rem;
+        margin-left: 8px;
+      }
+
+      .chart-card {
+        padding: 18px 16px 16px;
+        background: rgba(15, 34, 46, 0.92);
+        border: 1px solid rgba(8, 60, 78, 0.7);
+        border-radius: 16px;
+      }
+
+      .chart-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--text-secondary);
+        font-size: 0.82rem;
+        margin-bottom: 18px;
+      }
+
+      .chart-header strong {
+        color: var(--text-primary);
+        font-size: 1rem;
+      }
+
+      .line-chart {
+        position: relative;
+        height: 120px;
+        border-radius: 14px;
+        background: linear-gradient(180deg, rgba(5, 236, 189, 0.05), rgba(3, 19, 31, 0));
+        overflow: hidden;
+      }
+
+      .line-chart svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .point-grid {
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        background-size: 26px 26px;
+      }
+
+      .bottom-grid {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 14px;
+        margin-top: 16px;
+      }
+
+      .mini-ring {
+        position: relative;
+        width: 120px;
+        height: 120px;
+        margin: 8px auto 0;
+        border-radius: 50%;
+        background: conic-gradient(var(--primary) 0 46%, var(--blue) 46% 76%, var(--copper) 76% 100%);
+      }
+
+      .mini-ring::before {
+        content: "";
+        position: absolute;
+        inset: 18px;
+        border-radius: 50%;
+        background: rgba(3, 20, 33, 0.96);
+        border: 1px solid rgba(8, 60, 78, 0.7);
+      }
+
+      .ring-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 800;
+        z-index: 1;
+      }
+
+      .legend {
+        display: grid;
+        gap: 10px;
+        margin-top: 8px;
+        padding-left: 4px;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+      }
+
+      .legend-name {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .legend-swatch {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      .analytics {
+        background: rgba(2, 25, 41, 0.2);
+        border: 1px solid rgba(8, 60, 78, 0.5);
+        border-radius: var(--radius-xl);
+      }
+
+      .analysis-grid {
+        display: grid;
+        grid-template-columns: 0.96fr 1.04fr;
+        gap: 26px;
+        align-items: center;
+      }
+
+      .analysis-copy {
+        padding: 30px 0;
+      }
+
+      .analysis-copy h3 {
+        margin: 18px 0 16px;
+        font-size: clamp(2rem, 3vw, 3rem);
+        letter-spacing: -0.05em;
+        line-height: 1.1;
+      }
+
+      .analysis-copy > p {
+        margin: 0 0 22px;
+        color: var(--text-secondary);
+        font-size: 1.05rem;
+      }
+
+      .check-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 12px;
+      }
+
+      .check-list li {
+        position: relative;
+        padding-left: 28px;
+        color: var(--text-primary);
+        font-size: 1rem;
+      }
+
+      .check-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: rgba(5, 236, 189, 0.12);
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 0.8rem;
+      }
+
+      .analysis-panel {
+        padding: 20px;
+      }
+
+      .analysis-card {
+        background: linear-gradient(180deg, rgba(7, 39, 55, 0.95), rgba(2, 25, 41, 0.92));
+        border: 1px solid rgba(8, 60, 78, 0.8);
+        border-radius: 22px;
+        padding: 18px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .analysis-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+      }
+
+      .analysis-header h4 {
+        margin: 0;
+        font-size: 1rem;
+        color: var(--text-secondary);
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--primary);
+        box-shadow: 0 0 15px rgba(5, 236, 189, 0.8);
+      }
+
+      .analysis-stat-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .mini-stat {
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 1px solid rgba(8, 60, 78, 0.7);
+        background: rgba(15, 34, 46, 0.6);
+      }
+
+      .mini-stat .label {
+        display: block;
+        color: var(--text-muted);
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .mini-stat strong {
+        font-size: 1.4rem;
+        letter-spacing: -0.04em;
+      }
+
+      .mini-stat .positive {
+        color: var(--primary);
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+
+      .analysis-chart {
+        background: rgba(15, 34, 46, 0.92);
+        border: 1px solid rgba(8, 60, 78, 0.7);
+        border-radius: 18px;
+        padding: 14px 14px 0;
+      }
+
+      .bars {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 8px;
+        height: 120px;
+        padding: 10px 10px 0;
+      }
+
+      .bar {
+        flex: 1;
+        border-radius: 10px 10px 4px 4px;
+        background: linear-gradient(180deg, var(--primary), rgba(5, 236, 189, 0.4));
+        min-height: 26px;
+        box-shadow: 0 10px 20px rgba(5, 236, 189, 0.12);
+      }
+
+      .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+
+      .price-card {
+        position: relative;
+        background: linear-gradient(180deg, rgba(7, 39, 55, 0.78), rgba(2, 25, 41, 0.9));
+        border: 1px solid rgba(8, 60, 78, 0.8);
+        border-radius: var(--radius-xl);
+        padding: 26px 22px 24px;
+        box-shadow: var(--shadow-soft);
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+      }
+
+      .price-card.featured {
+        border: 1px solid var(--primary);
+        box-shadow: var(--shadow-glow);
+        transform: translateY(-8px);
+      }
+
+      .popular-tag {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 7px 10px;
+        border-radius: 999px;
+        background: rgba(5, 236, 189, 0.12);
+        border: 1px solid rgba(5, 236, 189, 0.3);
+        color: var(--primary);
+        font-size: 0.72rem;
+        font-weight: 700;
+      }
+
+      .price-card h3 {
+        margin: 14px 0 10px;
+        font-size: 1.18rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text-primary);
+      }
+
+      .price {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .price strong {
+        font-size: clamp(2rem, 3vw, 2.8rem);
+        letter-spacing: -0.06em;
+      }
+
+      .price span {
+        color: var(--text-secondary);
+      }
+
+      .plan-text {
+        color: var(--text-secondary);
+        margin: 0 0 20px;
+        min-height: 54px;
+      }
+
+      .plan-features {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 24px;
+        display: grid;
+        gap: 12px;
+        color: var(--text-primary);
+      }
+
+      .plan-features li {
+        position: relative;
+        padding-left: 28px;
+      }
+
+      .plan-features li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(5, 236, 189, 0.12);
+        color: var(--primary);
+        font-weight: 800;
+        font-size: 0.78rem;
+      }
+
+      .plan-btn {
+        margin-top: auto;
+        width: 100%;
+      }
+
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 20px;
+      }
+
+      .benefit-card {
+        background: linear-gradient(180deg, rgba(7, 39, 55, 0.8), rgba(2, 25, 41, 0.9));
+        border: 1px solid rgba(8, 60, 78, 0.8);
+        border-radius: var(--radius-lg);
+        padding: 24px 18px 20px;
+        box-shadow: var(--shadow-soft);
+      }
+
+      .benefit-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, rgba(5, 236, 189, 0.12), rgba(63, 127, 187, 0.12));
+        border: 1px solid rgba(5, 236, 189, 0.18);
+        color: var(--primary);
+        font-size: 1.5rem;
+        margin-bottom: 18px;
+      }
+
+      .benefit-card h3 {
+        margin: 0 0 10px;
+        font-size: 1.22rem;
+        letter-spacing: -0.03em;
+      }
+
+      .benefit-card p {
+        margin: 0;
+        color: var(--text-secondary);
+      }
+
+      .faq-wrap {
+        max-width: 920px;
+        margin: 0 auto;
+      }
+
+      .faq-list {
+        display: grid;
+        gap: 14px;
+      }
+
+      .faq-item {
+        background: rgba(7, 39, 55, 0.7);
+        border: 1px solid rgba(8, 60, 78, 0.8);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      .faq-question {
+        width: 100%;
+        background: transparent;
+        border: 0;
+        color: var(--text-primary);
+        cursor: pointer;
+        padding: 22px 24px;
+        text-align: left;
+        font-size: 1.06rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+      }
+
+      .faq-question span:last-child {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: rgba(5, 236, 189, 0.08);
+        color: var(--primary);
+        font-size: 1.2rem;
+        transition: transform 0.25s ease;
+      }
+
+      .faq-item.active .faq-question span:last-child {
+        transform: rotate(45deg);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease, padding 0.35s ease;
+        padding: 0 24px;
+        color: var(--text-secondary);
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 180px;
+        padding: 0 24px 22px;
+      }
+
+      .site-footer {
+        background: rgba(1, 19, 31, 0.96);
+        border-top: 1px solid rgba(8, 60, 78, 0.7);
+        padding: 32px 0 22px;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.3fr 0.8fr 0.8fr 0.9fr;
+        gap: 24px;
+        padding-bottom: 24px;
+      }
+
+      .footer-brand p {
+        color: var(--text-secondary);
+        max-width: 360px;
+        margin-top: 14px;
+      }
+
+      .footer-column h4 {
+        margin: 0 0 16px;
+        font-size: 1rem;
+      }
+
+      .footer-links {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+      }
+
+      .footer-links a {
+        color: var(--text-secondary);
+        transition: color 0.2s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--text-primary);
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(8, 60, 78, 0.5);
+        padding-top: 18px;
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        text-align: center;
+      }
+
+      .reveal {
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (max-width: 1024px) {
+        .hero-grid,
+        .analysis-grid,
+        .pricing-grid,
+        .benefits-grid,
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+
+        .hero-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .analysis-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .pricing-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .benefits-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .footer-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 760px) {
+        .nav {
+          position: relative;
+        }
+
+        .nav-menu {
+          position: absolute;
+          top: calc(100% + 10px);
+          left: 0;
+          right: 0;
+          display: none;
+          flex-direction: column;
+          align-items: stretch;
+          padding: 18px 16px 12px;
+          background: rgba(2, 25, 41, 0.98);
+          border: 1px solid rgba(8, 60, 78, 0.8);
+          border-radius: 18px;
+          box-shadow: var(--shadow-soft);
+        }
+
+        .nav-menu.is-open {
+          display: flex;
+        }
+
+        .nav-links {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 16px;
+        }
+
+        .nav-actions {
+          width: 100%;
+          justify-content: stretch;
+          margin-top: 8px;
+        }
+
+        .nav-actions .btn {
+          flex: 1;
+        }
+
+        .nav-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-direction: column;
+        }
+
+        .nav-actions .btn-login {
+          display: none;
+        }
+
+        .section {
+          padding: 72px 0;
+        }
+
+        .hero {
+          padding-top: 28px;
+        }
+
+        .hero-copy h1 {
+          font-size: clamp(2.4rem, 12vw, 4rem);
+        }
+
+        .dashboard-shell {
+          padding: 14px;
+        }
+
+        .stats-grid,
+        .bottom-grid,
+        .analysis-stat-row,
+        .benefits-grid,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .price-card.featured {
+          transform: none;
+        }
+
+        .faq-question {
+          padding: 18px 18px;
+          font-size: 0.98rem;
+        }
+
+        .faq-answer {
+          padding: 0 18px;
+        }
+
+        .faq-item.active .faq-answer {
+          padding: 0 18px 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container nav">
+        <a href="#inicio" class="brand" aria-label="FinAI início">
+          <span class="brand-mark"></span>
+          <span>FinAI</span>
+        </a>
+
+        <div class="nav-menu" id="navMenu">
+          <nav class="nav-links" aria-label="Navegação principal">
+            <a class="nav-link" href="#inicio">Início</a>
+            <a class="nav-link" href="#analises">Análises com IA</a>
+            <a class="nav-link" href="#planos">Planos</a>
+            <a class="nav-link" href="#beneficios">Benefícios</a>
+            <a class="nav-link" href="#faq">FAQ</a>
+          </nav>
+          <div class="nav-actions">
+            <a href="#" class="btn btn-secondary btn-login">Entrar</a>
+            <a href="#planos" class="btn btn-primary">Comece agora</a>
+          </div>
+        </div>
+
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy reveal">
+            <div class="eyebrow">Inteligência financeira com IA</div>
+            <h1>Mais clareza para <span class="highlight">suas decisões</span> financeiras.</h1>
+            <p>
+              Transforme seus dados financeiros em análises inteligentes e tome decisões más rápidas,
+              seguras e estratégicas.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#planos" class="btn btn-primary">Começar agora</a>
+              <a href="#analises" class="btn btn-secondary">Conhecer a plataforma</a>
+            </div>
+
+            <div class="hero-points">
+              <span>Análises inteligentes</span>
+              <span>Dados protegidos</span>
+              <span>Disponível online</span>
+            </div>
+          </div>
+
+          <div class="dashboard-shell reveal" aria-label="Dashboard financeiro em destaque">
+            <div class="dashboard">
+              <div class="dashboard-top">
+                <h3>Visão geral</h3>
+                <div class="pill">Em alta</div>
+              </div>
+
+              <div class="stats-grid">
+                <div class="stat-card">
+                  <div class="stat-label">Receita</div>
+                  <div class="stat-value">R$ 84,2k</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-label">Despesas</div>
+                  <div class="stat-value">R$ 39,7k</div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-label">Lucro líquido</div>
+                  <div class="stat-value">R$ 44,5k <span class="up">+12,8%</span></div>
+                </div>
+                <div class="stat-card">
+                  <div class="stat-label">Crescimento</div>
+                  <div class="stat-value">+18,4%</div>
+                </div>
+              </div>
+
+              <div class="chart-card">
+                <div class="chart-header">
+                  <strong>Fluxo</strong>
+                  <span>Últimos 6 meses</span>
+                </div>
+                <div class="line-chart">
+                  <div class="point-grid"></div>
+                  <svg viewBox="0 0 300 120" preserveAspectRatio="none" aria-label="Gráfico de linha do fluxo financeiro">
+                    <path d="M0,92 C35,85 60,74 86,62 S140,48 160,55 S205,35 232,40 S275,16 300,18" fill="none" stroke="#05ECBD" stroke-width="3.5" stroke-linecap="round"/>
+                    <path d="M0,92 C35,85 60,74 86,62 S140,48 160,55 S205,35 232,40 S275,16 300,18 L300,120 L0,120 Z" fill="rgba(5,236,189,0.09)"/>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="bottom-grid">
+                <div class="chart-card">
+                  <div class="chart-header">
+                    <strong>Distribuição</strong>
+                    <span>Este mês</span>
+                  </div>
+                  <div class="mini-ring"><div class="ring-center">72%</div></div>
+                </div>
+
+                <div class="chart-card">
+                  <div class="chart-header">
+                    <strong>Indicadores</strong>
+                  </div>
+                  <div class="legend">
+                    <div class="legend-item">
+                      <span class="legend-name"><span class="legend-swatch" style="background: var(--primary);"></span>Receita</span>
+                      <strong>46%</strong>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-name"><span class="legend-swatch" style="background: var(--blue);"></span>Invest.</span>
+                      <strong>32%</strong>
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-name"><span class="legend-swatch" style="background: var(--copper);"></span>Despesas</span>
+                      <strong>22%</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section analytics" id="analises">
+        <div class="container analysis-grid">
+          <div class="analysis-copy reveal">
+            <div class="eyebrow">Análises com IA</div>
+            <h3>Entenda o que seus números estão dizendo.</h3>
+            <p>
+              Descubra padrões, oportunidades e riscos em tempo real, com recomendações personalizadas
+              para orientar cada decisão financeira com mais segurança.
+            </p>
+
+            <ul class="check-list">
+              <li>Análise automática de receitas</li>
+              <li>Identificação de despesas</li>
+              <li>Previsões financeiras</li>
+              <li>Identificação de tendências</li>
+              <li>Indicadores de desempenho</li>
+            </ul>
+          </div>
+
+          <div class="analysis-panel reveal">
+            <div class="analysis-card">
+              <div class="analysis-header">
+                <h4>Resumo financeiro</h4>
+                <span class="status-dot" aria-hidden="true"></span>
+              </div>
+
+              <div class="analysis-stat-row">
+                <div class="mini-stat">
+                  <span class="label">Receita</span>
+                  <strong>R$ 42.850</strong>
+                </div>
+                <div class="mini-stat">
+                  <span class="label">Despesas</span>
+                  <strong>R$ 18.420</strong>
+                </div>
+                <div class="mini-stat">
+                  <span class="label">Lucro líquido</span>
+                  <strong>R$ 24.430</strong>
+                </div>
+                <div class="mini-stat">
+                  <span class="label">Crescimento</span>
+                  <strong class="positive">+18,4%</strong>
+                </div>
+              </div>
+
+              <div class="analysis-chart">
+                <div class="bars" aria-label="Gráfico de barras de desempenho">
+                  <span class="bar" style="height: 48%;"></span>
+                  <span class="bar" style="height: 62%;"></span>
+                  <span class="bar" style="height: 54%;"></span>
+                  <span class="bar" style="height: 75%;"></span>
+                  <span class="bar" style="height: 88%;"></span>
+                  <span class="bar" style="height: 96%;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="planos">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Planos e preços</div>
+            <h2>Escolha o plano ideal para acompanhar sua evolução financeira.</h2>
+          </div>
+
+          <div class="pricing-grid">
+            <article class="price-card reveal">
+              <h3>Básico</h3>
+              <div class="price"><strong>R$ 79,90</strong><span>/mês</span></div>
+              <p class="plan-text">O essencial para organizar suas finanças.</p>
+              <ul class="plan-features">
+                <li>Dashboard financeiro</li>
+                <li>Controle de receitas e despesas</li>
+                <li>Relatórios mensais</li>
+                <li>Suporte por e-mail</li>
+              </ul>
+              <a href="#" class="btn btn-secondary plan-btn">Começar agora</a>
+            </article>
+
+            <article class="price-card featured reveal">
+              <span class="popular-tag">Mais popular</span>
+              <h3>Mensal</h3>
+              <div class="price"><strong>R$ 149,90</strong><span>/mês</span></div>
+              <p class="plan-text">Mais análises, mais controle e melhores decisões.</p>
+              <ul class="plan-features">
+                <li>Tudo do plano Básico</li>
+                <li>Análises com IA</li>
+                <li>Previsão de fluxo de caixa</li>
+                <li>Metas financeiras</li>
+                <li>Suporte prioritário</li>
+              </ul>
+              <a href="#" class="btn btn-primary plan-btn">Começar agora</a>
+            </article>
+
+            <article class="price-card reveal">
+              <h3>Anual</h3>
+              <div class="price"><strong>R$ 1.499,00</strong><span>/ano</span></div>
+              <p class="plan-text">O melhor custo-benefício para crescer.</p>
+              <ul class="plan-features">
+                <li> Tudo do plano Mensal</li>
+                <li>Relatórios personalizados</li>
+                <li>Integração com bancos</li>
+                <li>Suporte prioritário 24/7</li>
+                <li>Desconto especial no plano anual</li>
+              </ul>
+              <a href="#" class="btn btn-secondary plan-btn">Começar agora</a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="beneficios">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">Benefícios</div>
+            <h2>Organize sua vida financeira com inteligência e clareza.</h2>
+          </div>
+
+          <div class="benefits-grid">
+            <article class="benefit-card reveal">
+              <div class="benefit-icon">✦</div>
+              <h3>Inteligência artificial</h3>
+              <p>Análises automáticas para facilitar suas decisões.</p>
+            </article>
+
+            <article class="benefit-card reveal">
+              <div class="benefit-icon">▣</div>
+              <h3>Segurança</h3>
+              <p>Seus dados protegidos com tecnologia moderna.</p>
+            </article>
+
+            <article class="benefit-card reveal">
+              <div class="benefit-icon">◎</div>
+              <h3>Simplicidade</h3>
+              <p>Informações complexas apresentadas de forma simples.</p>
+            </article>
+
+            <article class="benefit-card reveal">
+              <div class="benefit-icon">◈</div>
+              <h3>Controle</h3>
+              <p>Acompanhe sua evolução financeira em um único lugar.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="faq">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="eyebrow">FAQ</div>
+            <h2>Perguntas frequentes</h2>
+          </div>
+
+          <div class="faq-wrap reveal">
+            <div class="faq-list">
+              <div class="faq-item active">
+                <button class="faq-question" type="button">
+                  <span>Como funciona a análise com IA?</span>
+                  <span>+</span>
+                </button>
+                <div class="faq-answer">
+                  Nossa IA conecta seus dados financeiros, identifica padrões, analisa receitas, despesas e趋势, e oferece recomendações orientadas para decisões mais assertivas.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" type="button">
+                  <span>Meus dados financeiros ficam seguros?</span>
+                  <span>+</span>
+                </button>
+                <div class="faq-answer">
+                  Sim. Utilizamos criptografia, controles de acesso e padrões modernos de segurança para manter seus dados protegidos e privados.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" type="button">
+                  <span>Posso cancelar meu plano?</span>
+                  <span>+</span>
+                </button>
+                <div class="faq-answer">
+                  Claro. Você pode cancelar a qualquer momento, sem complicações, e continuará tendo acesso até o fim do período contratado.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" type="button">
+                  <span>Qual plano devo escolher?</span>
+                  <span>+</span>
+                </button>
+                <div class="faq-answer">
+                  O plano ideal depende do seu volume de movimentação e dos objetivos da sua rotina financeira. O Básico é ótimo para organização e o Mensal traz análises avançadas.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" type="button">
+                  <span>A plataforma funciona no celular?</span>
+                  <span>+</span>
+                </button>
+                <div class="faq-answer">
+                  Sim. A plataforma foi pensada para funcionar perfeitamente em desktop, tablet e celular, com responsividade total.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-question" type="button">
+                  <span>Como funciona o suporte?</span>
+                  <span>+</span>
+                </button>
+                <div class="faq-answer">
+                  Oferecemos suporte por e-mail, atendimento prioritário para planos pagos e ajuda para dúvidas sobre uso, cobrança e integração.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="#inicio" class="brand">
+              <span class="brand-mark"></span>
+              <span>FinAI</span>
+            </a>
+            <p>Inteligência para decisões financeiras melhores.</p>
+          </div>
+
+          <div class="footer-column">
+            <h4>Produto</h4>
+            <ul class="footer-links">
+              <li><a href="#analises">Análises com IA</a></li>
+              <li><a href="#planos">Planos</a></li>
+              <li><a href="#beneficios">Benefícios</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4>Empresa</h4>
+            <ul class="footer-links">
+              <li><a href="#">Sobre</a></li>
+              <li><a href="#">Contato</a></li>
+              <li><a href="#faq">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h4>Suporte</h4>
+            <ul class="footer-links">
+              <li><a href="#">Central de ajuda</a></li>
+              <li><a href="#">Termos de uso</a></li>
+              <li><a href="#">Privacidade</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">© 2026 FinAI. Todos os direitos reservados.</div>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.getElementById('navToggle');
+      const navMenu = document.getElementById('navMenu');
+
+      navToggle.addEventListener('click', () => {
+        const isOpen = navMenu.classList.toggle('is-open');
+        navToggle.classList.toggle('is-open', isOpen);
+        navToggle.setAttribute('aria-expanded', String(isOpen));
+      });
+
+      document.querySelectorAll('.nav-link').forEach((link) => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('is-open');
+          navToggle.classList.remove('is-open');
+          navToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      const faqItems = document.querySelectorAll('.faq-item');
+
+      faqItems.forEach((item) => {
+        const trigger = item.querySelector('.faq-question');
+        trigger.addEventListener('click', () => {
+          const isOpen = item.classList.contains('active');
+
+          faqItems.forEach((faq) => {
+            faq.classList.remove('active');
+          });
+
+          if (!isOpen) {
+            item.classList.add('active');
+          }
+        });
+      });
+
+      const revealItems = document.querySelectorAll('.reveal');
+
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    </script>
+  </body>
+</html>

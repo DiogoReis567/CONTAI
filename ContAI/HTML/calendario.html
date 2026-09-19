@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finanly | Calendário</title>
+    <meta
+      name="description"
+      content="Calendário do sistema de planejamento financeiro Finanly."
+    />
+    <link rel="stylesheet" href="../STYLE/calendario.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Menu lateral do sistema">
+        <div class="sidebar__brand">
+          <div class="sidebar__brand-mark">F</div>
+          <div class="sidebar__brand-text">
+            <span class="sidebar__brand-label">Sistema</span>
+            <strong>Finanly</strong>
+          </div>
+        </div>
+
+        <nav class="sidebar__nav" aria-label="Navegação principal">
+          <a href="#" class="nav-item">Visão geral</a>
+          <a href="#" class="nav-item">Fluxo de caixa</a>
+          <a href="#" class="nav-item">Transações</a>
+          <a href="#" class="nav-item">Receitas</a>
+          <a href="#" class="nav-item nav-item--active">Calendário</a>
+          <a href="#" class="nav-item">Relatórios</a>
+          <a href="#" class="nav-item">Configurações</a>
+        </nav>
+
+        <div class="sidebar__summary">
+          <p class="sidebar__summary-title">Resumo</p>
+          <div class="summary-row">
+            <span>Receitas</span>
+            <strong>R$ 18.420</strong>
+          </div>
+          <div class="summary-row">
+            <span>Despesas</span>
+            <strong>R$ 9.860</strong>
+          </div>
+          <div class="summary-row summary-row--highlight">
+            <span>Saldo</span>
+            <strong>R$ 8.560</strong>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel" aria-label="Calendário do sistema">
+        <header class="page-header">
+          <div class="page-header__title">
+            <p class="page-header__eyebrow">Planejamento financeiro</p>
+            <h1>Calendário</h1>
+          </div>
+
+          <button type="button" class="btn btn--primary">Novo evento</button>
+        </header>
+
+        <section class="content-grid">
+          <section class="calendar-card" aria-labelledby="calendar-title">
+            <div class="calendar-toolbar">
+              <button type="button" class="calendar-nav" aria-label="Mês anterior">&#8249;</button>
+              <h2 id="calendar-title">Setembro 2026</h2>
+              <button type="button" class="calendar-nav" aria-label="Próximo mês">&#8250;</button>
+            </div>
+
+            <div class="calendar-weekdays" aria-label="Dias da semana">
+              <span>Dom</span>
+              <span>Seg</span>
+              <span>Ter</span>
+              <span>Qua</span>
+              <span>Qui</span>
+              <span>Sex</span>
+              <span>Sáb</span>
+            </div>
+
+            <div class="calendar-grid" aria-label="Dias do mês">
+              <button type="button" class="day day--muted" aria-label="Dia 30 de agosto">30</button>
+              <button type="button" class="day day--muted" aria-label="Dia 31 de agosto">31</button>
+              <button type="button" class="day" aria-label="Dia 1 de setembro">1</button>
+              <button type="button" class="day" aria-label="Dia 2 de setembro">2</button>
+              <button type="button" class="day" aria-label="Dia 3 de setembro">3</button>
+              <button type="button" class="day" aria-label="Dia 4 de setembro">4</button>
+              <button type="button" class="day" aria-label="Dia 5 de setembro">5</button>
+
+              <button type="button" class="day" aria-label="Dia 6 de setembro">6</button>
+              <button type="button" class="day" aria-label="Dia 7 de setembro">7</button>
+              <button type="button" class="day" aria-label="Dia 8 de setembro">8</button>
+              <button type="button" class="day" aria-label="Dia 9 de setembro">9</button>
+              <button type="button" class="day" aria-label="Dia 10 de setembro">10</button>
+              <button type="button" class="day" aria-label="Dia 11 de setembro">11</button>
+              <button type="button" class="day" aria-label="Dia 12 de setembro">12</button>
+
+              <button type="button" class="day" aria-label="Dia 13 de setembro">13</button>
+              <button type="button" class="day" aria-label="Dia 14 de setembro">14</button>
+              <button type="button" class="day" aria-label="Dia 15 de setembro">15</button>
+              <button type="button" class="day day--today" aria-label="Dia 16 de setembro, dia atual">16</button>
+              <button type="button" class="day" aria-label="Dia 17 de setembro">17</button>
+              <button type="button" class="day" aria-label="Dia 18 de setembro">18</button>
+              <button type="button" class="day" aria-label="Dia 19 de setembro">19</button>
+
+              <button type="button" class="day" aria-label="Dia 20 de setembro">20</button>
+              <button type="button" class="day" aria-label="Dia 21 de setembro">21</button>
+              <button type="button" class="day" aria-label="Dia 22 de setembro">22</button>
+              <button type="button" class="day" aria-label="Dia 23 de setembro">23</button>
+              <button type="button" class="day" aria-label="Dia 24 de setembro">24</button>
+              <button type="button" class="day" aria-label="Dia 25 de setembro">25</button>
+              <button type="button" class="day" aria-label="Dia 26 de setembro">26</button>
+
+              <button type="button" class="day" aria-label="Dia 27 de setembro">27</button>
+              <button type="button" class="day" aria-label="Dia 28 de setembro">28</button>
+              <button type="button" class="day" aria-label="Dia 29 de setembro">29</button>
+              <button type="button" class="day" aria-label="Dia 30 de setembro">30</button>
+              <button type="button" class="day day--muted" aria-label="Dia 1 de outubro">1</button>
+              <button type="button" class="day day--muted" aria-label="Dia 2 de outubro">2</button>
+              <button type="button" class="day day--muted" aria-label="Dia 3 de outubro">3</button>
+            </div>
+          </section>
+
+          <aside class="agenda-panel" aria-labelledby="agenda-title">
+            <div class="agenda-panel__header">
+              <h2 id="agenda-title">Eventos e compromissos</h2>
+              <button type="button" class="btn btn--secondary">Hoje</button>
+            </div>
+
+            <div class="agenda-panel__date">16 de setembro de 2026</div>
+
+            <ul class="agenda-list">
+              <li class="agenda-item agenda-item--income">
+                <div class="agenda-item__title-wrap">
+                  <span class="agenda-item__dot"></span>
+                  <strong>Recebimento de cliente</strong>
+                </div>
+                <div class="agenda-item__meta">
+                  <span>09:30</span>
+                  <span>+R$ 4.800,00</span>
+                </div>
+              </li>
+
+              <li class="agenda-item agenda-item--meeting">
+                <div class="agenda-item__title-wrap">
+                  <span class="agenda-item__dot"></span>
+                  <strong>Planejamento mensal</strong>
+                </div>
+                <div class="agenda-item__meta">
+                  <span>14:00</span>
+                  <span>Financeiro</span>
+                </div>
+              </li>
+
+              <li class="agenda-item agenda-item--expense">
+                <div class="agenda-item__title-wrap">
+                  <span class="agenda-item__dot"></span>
+                  <strong>Pagamento de fornecedor</strong>
+                </div>
+                <div class="agenda-item__meta">
+                  <span>16:45</span>
+                  <span>-R$ 1.250,00</span>
+                </div>
+              </li>
+            </ul>
+          </aside>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
