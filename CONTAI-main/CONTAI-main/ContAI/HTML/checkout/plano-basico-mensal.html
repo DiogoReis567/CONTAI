@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Contratação do plano Básico mensal da ContAI."
+    />
+    <title>Contratar plano Básico | ContAI</title>
+    <link rel="stylesheet" href="../../css/home.css" />
+    <link rel="shortcut icon" href="../../assets/icons/favicon.png" type="image/x-icon">
+  </head>
+  <body>
+    <main class="checkout-page">
+      <div class="checkout-shell">
+        <a
+          href="../home.html"
+          class="brand checkout-brand"
+          aria-label="Voltar para a home ContAI"
+        >
+          <span class="brand-mark">C</span>
+          <span class="brand-text">ContAI</span>
+        </a>
+
+        <div class="checkout-grid">
+          <section class="checkout-summary glass-panel">
+            <span class="eyebrow">Sua escolha</span>
+            <h1>
+              Plano <span class="text-cyan" data-checkout="name">Básico</span>
+            </h1>
+            <p data-checkout="description">
+              O essencial para começar a organizar sua operação com clareza.
+            </p>
+            <div class="checkout-price">
+              <span
+                class="checkout-annual-offer"
+                data-checkout="annual-offer"
+                hidden
+                ><del>R$ 249,00</del><b>50% OFF</b></span
+              >
+              <span>R$</span><strong data-checkout="price">49</strong
+              ><small data-checkout="period">/mês</small>
+            </div>
+            <ul class="checkout-benefits" data-checkout="benefits">
+              <li>Dashboard financeiro</li>
+              <li>Controle de estoque</li>
+              <li>Relatórios básicos</li>
+              <li>Alertas simples</li>
+            </ul>
+          </section>
+
+          <section class="checkout-card modal">
+            <div class="modal-header">
+              <span class="eyebrow">Contratação</span>
+              <h2>Finalize seu plano</h2>
+              <p>Preencha os dados para continuar com a contratação.</p>
+            </div>
+            <form class="checkout-form">
+              <label
+                >Nome completo<input
+                  type="text"
+                  name="name"
+                  placeholder="Seu nome completo"
+                  required
+              /></label>
+              <label
+                >E-mail<input
+                  type="email"
+                  name="email"
+                  placeholder="seu@email.com"
+                  required
+              /></label>
+              <label
+                >CNPJ<input
+                  type="text"
+                  name="cnpj"
+                  placeholder="00.000.000/0000-00"
+                  inputmode="numeric"
+                  maxlength="18"
+                  required
+              /></label>
+              <div class="coupon-box">
+                <label for="couponCode">Cupom de desconto</label>
+                <div class="coupon-row">
+                  <input
+                    id="couponCode"
+                    type="text"
+                    name="coupon"
+                    placeholder="Digite seu cupom"
+                    autocomplete="off"
+                  />
+                  <button
+                    class="btn btn-secondary"
+                    type="button"
+                    data-apply-coupon
+                  >
+                    Aplicar
+                  </button>
+                </div>
+                <small
+                  class="coupon-feedback"
+                  role="status"
+                  aria-live="polite"
+                ></small>
+              </div>
+              <div class="checkout-total" aria-label="Resumo do pagamento">
+                <div>
+                  <span>Subtotal</span
+                  ><strong data-checkout="subtotal">R$ 49,00</strong>
+                </div>
+                <div>
+                  <span>Desconto</span
+                  ><strong data-checkout="discount">R$ 0,00</strong>
+                </div>
+                <div class="total-line">
+                  <span>Total</span
+                  ><strong data-checkout="total">R$ 49,00</strong>
+                </div>
+              </div>
+              <label
+                >Forma de pagamento<select name="payment" required>
+                  <option value="">Selecione uma opção</option>
+                  <option value="card">Cartão de crédito</option>
+                  <option value="pix">PIX</option>
+                  <option value="boleto">Boleto bancário</option>
+                </select></label
+              >
+              <div class="payment-details" data-payment-details="card" hidden>
+                <label
+                  >Número do cartão<input
+                    type="text"
+                    name="cardNumber"
+                    inputmode="numeric"
+                    placeholder="0000 0000 0000 0000"
+                    maxlength="19"
+                /></label>
+                <div class="form-row split">
+                  <label
+                    >Validade<input
+                      type="text"
+                      name="cardExpiry"
+                      inputmode="numeric"
+                      placeholder="MM/AA"
+                      maxlength="5"
+                  /></label>
+                  <label
+                    >CVV<input
+                      type="text"
+                      name="cardCvv"
+                      inputmode="numeric"
+                      placeholder="000"
+                      maxlength="3"
+                  /></label>
+                </div>
+                <label
+                  >Nome no cartão<input
+                    type="text"
+                    name="cardName"
+                    placeholder="Nome impresso no cartão"
+                /></label>
+              </div>
+              <div
+                class="payment-details pix-details"
+                data-payment-details="pix"
+                hidden
+              >
+                <div
+                  class="fake-qr"
+                  aria-label="QR Code fictício para pagamento PIX"
+                ></div>
+                <strong>QR Code PIX fictício</strong>
+                <p>Use este código apenas para visualização da demonstração.</p>
+                <div class="copy-row">
+                  <input
+                    type="text"
+                    value="00020126580014BR.GOV.BCB.PIX0136contai-demo-plano-basico520400005303986540549.905802BR5913CONTAI DEMO6008CRUZEIRO62070503***6304DEMO"
+                    readonly
+                    data-copy-value
+                  /><button
+                    class="btn btn-secondary"
+                    type="button"
+                    data-copy-payment
+                  >
+                    Copiar
+                  </button>
+                </div>
+              </div>
+              <div class="payment-details" data-payment-details="boleto" hidden>
+                <label
+                  >Linha digitável<input
+                    type="text"
+                    value="34191.79001 01043.510047 91020.150008 1 98760000004900"
+                    readonly
+                    data-copy-value
+                /></label>
+                <button
+                  class="btn btn-secondary"
+                  type="button"
+                  data-copy-payment
+                >
+                  Copiar código do boleto
+                </button>
+                <p class="payment-note">
+                  Boleto fictício para demonstração. Nenhum pagamento real será
+                  gerado.
+                </p>
+              </div>
+              <p class="checkout-feedback" role="alert" aria-live="polite"></p>
+              <button class="btn btn-primary full" type="submit">
+                Continuar contratação
+              </button>
+            </form>
+            <a class="back-home" href="../home.html">Voltar para os planos</a>
+          </section>
+        </div>
+      </div>
+    </main>
+    <script src="../../js/home.js"></script>
+  </body>
+</html>
+
