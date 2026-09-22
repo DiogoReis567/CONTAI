@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../css/home.css" />
     <link
       rel="shortcut icon"
-      href="../../assets/icons/favicon.png"
+      href="../../ContAI/assets/icons/favicon.png"
       type="image/x-icon"
     />
   </head>
@@ -107,17 +107,98 @@
           <div class="hero-visual reveal">
             <div class="hero-video glass-panel">
               <video
+                poster="../../ContAI/assets/images/thumbnail.png"
                 controls
                 playsinline
                 preload="metadata"
                 aria-label="Vídeo de apresentação da ContAI"
               >
                 <source
-                  src="../assets/video/Vídeo sobre ContAI.mp4"
+                  src="../../ContAI/assets/video/Vídeo sobre ContAI.mp4"
                   type="video/mp4"
                 />
                 Seu navegador não suporta a reprodução de vídeo.
               </video>
+            </div>
+
+            <div
+              class="hero-chart glass-panel reveal"
+              aria-label="Gráfico de linhas mostrando crescimento de resultados"
+            >
+              <div class="hero-chart-heading">
+                <div>
+                  <span class="chart-label">Visão geral</span>
+                  <strong>Crescimento do negócio</strong>
+                </div>
+                <span class="chart-trend">+24,8%</span>
+              </div>
+              <svg
+                class="hero-chart-graphic"
+                viewBox="0 0 640 190"
+                role="img"
+                aria-label="Linha ascendente de resultados"
+              >
+                <defs>
+                  <linearGradient
+                    id="heroChartArea"
+                    x1="0"
+                    y1="0"
+                    x2="0"
+                    y2="1"
+                  >
+                    <stop
+                      offset="0%"
+                      stop-color="#5fe3ff"
+                      stop-opacity="0.22"
+                    />
+                    <stop offset="100%" stop-color="#5fe3ff" stop-opacity="0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  class="hero-chart-grid"
+                  d="M0 32H640M0 78H640M0 124H640M0 170H640"
+                />
+                <path
+                  class="hero-chart-area"
+                  d="M0 157L50 149L100 138L150 145L200 120L250 128L300 96L350 108L400 74L450 85L500 54L550 64L600 36L640 25V190H0Z"
+                >
+                  <animate
+                    attributeName="d"
+                    dur="7s"
+                    repeatCount="indefinite"
+                    calcMode="spline"
+                    keyTimes="0;0.32;0.68;1"
+                    keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                    values="M0 157L50 149L100 138L150 145L200 120L250 128L300 96L350 108L400 74L450 85L500 54L550 64L600 36L640 25V190H0Z;M0 160L50 139L100 146L150 118L200 129L250 92L300 112L350 68L400 86L450 48L500 61L550 30L600 44L640 18V190H0Z;M0 151L50 158L100 127L150 136L200 104L250 115L300 79L350 96L400 54L450 70L500 39L550 51L600 26L640 12V190H0Z;M0 157L50 149L100 138L150 145L200 120L250 128L300 96L350 108L400 74L450 85L500 54L550 64L600 36L640 25V190H0Z"
+                  />
+                </path>
+                <path
+                  class="hero-chart-line"
+                  pathLength="1"
+                  d="M0 157L50 149L100 138L150 145L200 120L250 128L300 96L350 108L400 74L450 85L500 54L550 64L600 36L640 25"
+                >
+                  <animate
+                    attributeName="d"
+                    dur="7s"
+                    repeatCount="indefinite"
+                    calcMode="spline"
+                    keyTimes="0;0.32;0.68;1"
+                    keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                    values="M0 157L50 149L100 138L150 145L200 120L250 128L300 96L350 108L400 74L450 85L500 54L550 64L600 36L640 25;M0 160L50 139L100 146L150 118L200 129L250 92L300 112L350 68L400 86L450 48L500 61L550 30L600 44L640 18;M0 151L50 158L100 127L150 136L200 104L250 115L300 79L350 96L400 54L450 70L500 39L550 51L600 26L640 12;M0 157L50 149L100 138L150 145L200 120L250 128L300 96L350 108L400 74L450 85L500 54L550 64L600 36L640 25"
+                  />
+                </path>
+                <circle class="hero-chart-point" cx="640" cy="25" r="6">
+                  <animate
+                    attributeName="cy"
+                    dur="7s"
+                    repeatCount="indefinite"
+                    calcMode="spline"
+                    keyTimes="0;0.32;0.68;1"
+                    keySplines="0.42 0 0.58 1;0.42 0 0.58 1;0.42 0 0.58 1"
+                    values="25;18;12;25"
+                  />
+                </circle>
+              </svg>
             </div>
           </div>
         </div>

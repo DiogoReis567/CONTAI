@@ -1,81 +1,3 @@
-const dashboardData = {
-  today: {
-    revenue: "R$ 82,4k",
-    expense: "R$ 36,9k",
-    profit: "R$ 45,5k",
-    sales: "1.248",
-    stock: "1.280",
-    lowStock: "18",
-    outStock: "3",
-    trend: {
-      revenue: "+18.2%",
-      expense: "+4.8%",
-      profit: "+12.1%",
-      sales: "+9.6%",
-    },
-  },
-  "7d": {
-    revenue: "R$ 128,7k",
-    expense: "R$ 52,1k",
-    profit: "R$ 76,6k",
-    sales: "1.842",
-    stock: "1.340",
-    lowStock: "15",
-    outStock: "4",
-    trend: {
-      revenue: "+23.5%",
-      expense: "+7.1%",
-      profit: "+19.2%",
-      sales: "+14.8%",
-    },
-  },
-  "30d": {
-    revenue: "R$ 412,9k",
-    expense: "R$ 194,2k",
-    profit: "R$ 218,7k",
-    sales: "5.630",
-    stock: "1.610",
-    lowStock: "23",
-    outStock: "6",
-    trend: {
-      revenue: "+31.8%",
-      expense: "+9.6%",
-      profit: "+27.6%",
-      sales: "+22.3%",
-    },
-  },
-  "3m": {
-    revenue: "R$ 1,26M",
-    expense: "R$ 612,8k",
-    profit: "R$ 647,2k",
-    sales: "18.920",
-    stock: "1.940",
-    lowStock: "31",
-    outStock: "7",
-    trend: {
-      revenue: "+42.3%",
-      expense: "+13.4%",
-      profit: "+36.1%",
-      sales: "+28.7%",
-    },
-  },
-  "1y": {
-    revenue: "R$ 4,76M",
-    expense: "R$ 2,34M",
-    profit: "R$ 2,42M",
-    sales: "74.500",
-    stock: "2.420",
-    lowStock: "27",
-    outStock: "5",
-    trend: {
-      revenue: "+68.9%",
-      expense: "+18.1%",
-      profit: "+58.4%",
-      sales: "+41.2%",
-    },
-  },
-};
-
 const historyEntries = [
   {
     title: "Venda realizada",
@@ -296,6 +218,48 @@ const companyForm = registerModal?.querySelector(".company-form");
 const loginForm = loginModal?.querySelector(".login-form");
 const wizardSteps = [...document.querySelectorAll(".wizard-step")];
 const wizardProgress = [...document.querySelectorAll(".wizard-progress span")];
+
+const initPasswordVisibility = () => {
+  document.querySelectorAll('input[type="password"]').forEach((input) => {
+    if (input.parentElement?.classList.contains("password-field-wrap")) return;
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "password-field-wrap";
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "password-toggle";
+    toggle.setAttribute("aria-label", "Mostrar senha");
+    toggle.setAttribute("title", "Mostrar senha");
+    toggle.innerHTML =
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>';
+
+    toggle.addEventListener("click", () => {
+      const shouldShow = input.type === "password";
+      input.type = shouldShow ? "text" : "password";
+      toggle.innerHTML = shouldShow
+        ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>'
+        : '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>';
+      toggle.setAttribute(
+        "aria-label",
+        shouldShow ? "Ocultar senha" : "Mostrar senha",
+      );
+      toggle.setAttribute(
+        "title",
+        shouldShow ? "Ocultar senha" : "Mostrar senha",
+      );
+      input.focus();
+    });
+
+    const parent = input.parentElement;
+    if (!parent) return;
+    parent.insertBefore(wrapper, input);
+    wrapper.appendChild(input);
+    wrapper.appendChild(toggle);
+  });
+};
+
+initPasswordVisibility();
 let currentStep = 1;
 
 const digitsOnly = (value) => value.replace(/\D/g, "");
@@ -925,4 +889,157 @@ contactForm?.addEventListener("submit", (event) => {
   formFeedback.textContent =
     "Mensagem enviada com sucesso! Nossa equipe responderá em breve.";
   contactForm.reset();
+});
+
+const HOME_STATE_KEY = "contai_app_state_v1";
+const homeMoney = (value) =>
+  Number(value || 0).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+
+function loadHomeState() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(HOME_STATE_KEY) || "null");
+    return {
+      products: Array.isArray(saved?.products) ? saved.products : [],
+      sales: Array.isArray(saved?.sales) ? saved.sales : [],
+      expenses: Array.isArray(saved?.expenses) ? saved.expenses : [],
+    };
+  } catch {
+    return { products: [], sales: [], expenses: [] };
+  }
+}
+
+function getHomeTotals() {
+  const state = loadHomeState();
+  const revenue = state.sales.reduce(
+    (total, sale) => total + Number(sale.total || 0),
+    0,
+  );
+  const costOfSales = state.sales.reduce((total, sale) => {
+    const product = state.products.find((item) => item.id === sale.productId);
+    return (
+      total +
+      Number(
+        sale.costTotal ??
+          (product?.costPrice || 0) * Number(sale.quantity || 0),
+      )
+    );
+  }, 0);
+  const expenses = state.expenses.reduce(
+    (total, expense) => total + Number(expense.value || 0),
+    0,
+  );
+  return {
+    state,
+    revenue,
+    costOfSales,
+    expenses,
+    profit: revenue - costOfSales - expenses,
+    sales: state.sales.length,
+    stock: state.products.reduce(
+      (total, product) => total + Number(product.quantity || 0),
+      0,
+    ),
+    lowStock: state.products.filter(
+      (product) =>
+        Number(product.quantity || 0) <= Number(product.lowLimit || 0),
+    ).length,
+    outStock: state.products.filter(
+      (product) => Number(product.quantity || 0) === 0,
+    ).length,
+  };
+}
+
+function syncHomeMetrics() {
+  const metrics = getHomeTotals();
+  const revenueElement = document.querySelector('[data-metric="revenue"]');
+  const expenseElement = document.querySelector('[data-metric="expense"]');
+  const profitElement = document.querySelector('[data-metric="profit"]');
+  if (!revenueElement || !expenseElement || !profitElement) return;
+
+  const { revenue, expenses, profit } = metrics;
+  const expenseRate = revenue ? (expenses / revenue) * 100 : 0;
+  const margin = revenue ? (profit / revenue) * 100 : 0;
+  const signed = (value) =>
+    `${value > 0 ? "+" : ""}${value.toFixed(1).replace(".", ",")}%`;
+
+  revenueElement.textContent = homeMoney(revenue);
+  expenseElement.textContent = homeMoney(expenses);
+  profitElement.textContent = homeMoney(profit);
+  document
+    .querySelector('[data-metric="sales"]')
+    ?.replaceChildren(document.createTextNode(String(metrics.sales)));
+  document
+    .querySelector('[data-metric="stock"]')
+    ?.replaceChildren(document.createTextNode(String(metrics.stock)));
+  document
+    .querySelector('[data-metric="lowStock"]')
+    ?.replaceChildren(document.createTextNode(String(metrics.lowStock)));
+  document
+    .querySelector('[data-metric="outStock"]')
+    ?.replaceChildren(document.createTextNode(String(metrics.outStock)));
+
+  const setTrend = (selector, text, value) => {
+    const element = document.querySelector(selector);
+    if (!element) return;
+    element.replaceChildren(document.createTextNode(text));
+    element.classList.toggle("negative", value < 0);
+    element.classList.toggle("positive", value >= 0);
+  };
+
+  setTrend('[data-trend="revenue"]', "Base atual", margin);
+  setTrend(
+    '[data-trend="expense"]',
+    `${signed(expenseRate)} da receita`,
+    expenseRate,
+  );
+  setTrend('[data-trend="profit"]', `${signed(margin)} margem`, margin);
+  setTrend('[data-trend="sales"]', `${metrics.sales} vendas registradas`, 0);
+
+  const aiPanel = document.querySelector(".ai-panel");
+  const aiDescription = aiPanel?.querySelector(":scope > p");
+  if (aiDescription)
+    aiDescription.textContent = `As despesas representam ${expenseRate.toFixed(1).replace(".", ",")}% da receita atual. O resultado líquido é ${homeMoney(profit)}.`;
+  const aiMetrics = aiPanel?.querySelectorAll(".ai-metrics > div");
+  if (aiMetrics?.length >= 3) {
+    aiMetrics[0].querySelector("span").textContent = "Margem líquida";
+    aiMetrics[0].querySelector("strong").textContent = signed(margin);
+    aiMetrics[1].querySelector("span").textContent = "Despesas";
+    aiMetrics[1].querySelector("strong").textContent = signed(expenseRate);
+    aiMetrics[2].querySelector("span").textContent = "Resultado";
+    aiMetrics[2].querySelector("strong").textContent =
+      profit < 0 ? "Negativo" : "Positivo";
+    aiMetrics[2]
+      .querySelector("strong")
+      .classList.toggle("negative", profit < 0);
+  }
+
+  const chartPath = document.querySelector(".line-chart svg path");
+  const chartTag = document.querySelector(".chart-panel .tag");
+  if (chartTag) chartTag.textContent = "Últimos 7 dias";
+  if (chartPath) {
+    const end = new Date();
+    end.setHours(12, 0, 0, 0);
+    const daily = Array.from({ length: 7 }, (_, index) => {
+      const date = new Date(end);
+      date.setDate(end.getDate() - (6 - index));
+      return metrics.state.sales
+        .filter((sale) => sale.date === date.toISOString().slice(0, 10))
+        .reduce((total, sale) => total + Number(sale.total || 0), 0);
+    });
+    const max = Math.max(1, ...daily);
+    const points = daily.map((value, index) => {
+      const x = (index / Math.max(1, daily.length - 1)) * 400;
+      const y = 175 - (value / max) * 135;
+      return `${x},${y}`;
+    });
+    chartPath.setAttribute("d", `M${points.join(" L")}`);
+  }
+}
+
+syncHomeMetrics();
+window.addEventListener("storage", (event) => {
+  if (event.key === HOME_STATE_KEY) syncHomeMetrics();
 });

@@ -47,9 +47,12 @@ body {
   font-family: "Segoe UI", Inter, Arial, sans-serif;
   color: var(--text);
   background:
+    linear-gradient(rgba(123, 170, 196, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123, 170, 196, 0.035) 1px, transparent 1px),
     radial-gradient(circle at top left, rgba(62, 221, 255, 0.13), transparent 30%),
     radial-gradient(circle at right center, rgba(82, 115, 255, 0.14), transparent 28%),
     linear-gradient(180deg, var(--bg) 0%, #06121d 100%);
+  background-size: 88px 88px, 88px 88px, auto, auto, auto;
   line-height: 1.6;
 }
 
@@ -128,6 +131,14 @@ button {
 
 .text-violet {
   color: var(--purple);
+}
+
+.positive {
+  color: var(--success);
+}
+
+.negative {
+  color: var(--danger);
 }
 
 .glass-panel {
@@ -364,9 +375,114 @@ button {
 .hero-video video {
   display: block;
   width: 100%;
+  height: 100%;
   aspect-ratio: 16 / 10;
   background: var(--bg-strong);
   object-fit: cover;
+}
+
+.hero-chart {
+  width: min(100%, 670px);
+  margin: 18px 0 0 auto;
+  padding: 20px 22px 16px;
+  overflow: hidden;
+  border-radius: 22px;
+  border: 1px solid rgba(186, 210, 227, 0.16);
+  background: linear-gradient(180deg, rgba(17, 35, 48, 0.88), rgba(8, 18, 28, 0.94));
+}
+
+.hero-chart-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hero-chart-heading strong,
+.chart-label {
+  display: block;
+}
+
+.chart-label {
+  margin-bottom: 4px;
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.hero-chart-heading strong {
+  font-size: 1rem;
+}
+
+.chart-trend {
+  color: var(--green);
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hero-chart-graphic {
+  width: 100%;
+  height: auto;
+  margin-top: 12px;
+  overflow: visible;
+}
+
+.hero-chart-grid {
+  fill: none;
+  stroke: rgba(164, 183, 201, 0.13);
+  stroke-width: 1;
+}
+
+.hero-chart-area {
+  fill: url(#heroChartArea);
+  opacity: 0;
+  transition: opacity 0.2s ease 0.7s;
+}
+
+.hero-chart-line {
+  fill: none;
+  stroke: var(--primary);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 5;
+  filter: drop-shadow(0 0 8px rgba(95, 227, 255, 0.55));
+}
+
+.hero-chart-point {
+  fill: var(--green);
+  stroke: rgba(101, 240, 195, 0.22);
+  stroke-width: 10;
+  opacity: 0;
+  transform-origin: 640px 25px;
+  transform: scale(0.5);
+  transition: opacity 0.2s ease 1.2s, transform 0.35s ease 1.2s;
+}
+
+.hero-chart.visible .hero-chart-area,
+.hero-chart.visible .hero-chart-point {
+  opacity: 1;
+}
+
+.hero-chart.visible .hero-chart-point {
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chart-area,
+  .hero-chart-point {
+    opacity: 1;
+    transition: none;
+  }
+
+  .hero-chart-graphic animate {
+    display: none;
+  }
+
+  .hero-chart-point {
+    transform: scale(1);
+  }
 }
 
 .dashboard-window {
@@ -1476,6 +1592,11 @@ button {
 .wizard-step textarea { resize: vertical; }
 .wizard-actions { display: flex; justify-content: flex-end; gap: 12px; margin-top: 4px; }
 .wizard-actions .btn { flex: 1; }
+.password-field-wrap { position: relative; display: flex; align-items: center; }
+.password-field-wrap input { padding-right: 42px !important; }
+.password-toggle { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); display: inline-grid; place-items: center; width: 26px; height: 26px; border: 0; border-radius: 8px; background: transparent; color: rgba(214,227,238,0.8); cursor: pointer; transition: color 0.2s ease, background 0.2s ease; }
+.password-toggle svg { width: 18px; height: 18px; stroke: currentColor; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.password-toggle:hover, .password-toggle:focus-visible { background: rgba(255,255,255,0.06); color: var(--text); outline: none; }
 .password-strength { display: flex; align-items: center; gap: 10px; margin-top: -8px; }
 .password-strength span { width: 84px; height: 5px; border-radius: 999px; background: rgba(255,255,255,0.12); transition: background 0.2s ease; }
 .password-strength span.weak { background: var(--danger); }
